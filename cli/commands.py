@@ -26,4 +26,5 @@ def helpCommand():
 
 
 def exitCommand():
+    print("Exiting Task Manager ...\n")
     exit()

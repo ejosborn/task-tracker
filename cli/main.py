@@ -1,5 +1,3 @@
-import argparse
-
 from commands import addTask, updateTask, exitCommand, deleteTask, helpCommand
 
 commands = {

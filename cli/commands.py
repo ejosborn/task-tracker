@@ -7,7 +7,7 @@ def addTask():
     taskName = input("\nName of Task:\n")
     taskDescription = input("\nDescription of Task:\n")
     taskPriority = input("\nTask Priority: (Low, Medium, High, Urgent)\n")
-    taskStatus = input("\nTask Status: (New , In Progress, Completed)\n")
+    taskStatus = input("\nTask Status: (New, In Progress, Completed)\n")
     print("\nSending to database...")
 
     task = Task(taskName, taskDescription, taskPriority, taskStatus)

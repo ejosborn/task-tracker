@@ -7,11 +7,7 @@ load_dotenv()
 
 class TaskManager:
     def __init__(self):
-        try:
-            self.client = MongoClient(os.getenv("connection_string"))
-            print("Connected to MongoDB successfully!")
-        except Exception as e:
-            print(f"Failed to connect to MongoDB: {e}")
+        self.client = MongoClient(os.getenv("connection_string"))
 
     def add_task(self, task):
         try:
@@ -19,10 +15,10 @@ class TaskManager:
             task_collection = db["tasks"]
 
             # Insert the task into collection
-            result = task_collection.insert_one(task)
+            task_collection.insert_one(task)
 
             # Print acknowledgment message
-            print(f"Task added to database: {result.acknowledged}")
+            print("\nTask added to database")
         except Exception as e:
             print(f"Failed to add task to database: {e}")
 

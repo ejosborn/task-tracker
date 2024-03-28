@@ -1,9 +1,27 @@
+from app.models import Task
+from app.task_manager import TaskManager
+
+
 def addTask():
-    print("Add a Task")
+    print("Adding task in progress ...")
+    taskName = input("\nName of Task:\n")
+    taskDescription = input("\nDescription of Task:\n")
+    taskPriority = input("\nTask Priority: (Low, Medium, High, Urgent)\n")
+    taskStatus = input("\nTask Status: (New , In Progress, Completed)\n")
+    print("\nSending to database...")
+
+    task = Task(taskName, taskDescription, taskPriority, taskStatus)
+    task_dict = task.to_dict()
+
+    task_manager = TaskManager()
+    task_manager.add_task(task_dict)
 
 
 def updateTask():
-    print("Update a task")
+    taskName = input("\nInput Task Name to Update (case sensitive):\n")
+    print(f"Looking for {taskName} now ...\n")
+    print("Found Task\n")
+    print(f"What would you like to update from {taskName}:")
 
 
 def listTasks():
@@ -11,7 +29,14 @@ def listTasks():
 
 
 def deleteTask():
-    print("Delete a task")
+    taskName = input("\nWhich task would you like to delete (case sensitive):\n")
+    print(f"Looking for {taskName} now")
+    deleteTask = input(f"Are you sure you want to delete {taskName}? (y/n)\n")
+    deleteTask = deleteTask.lower()
+    if deleteTask == "y":
+        print(f"Deleting task: {taskName}\n")
+    else:
+        print("Back to menu")
 
 
 def helpCommand():
@@ -31,5 +56,5 @@ def helpCommand():
 
 
 def exitCommand():
-    print("Exiting Task Manager ...\n")
+    print("\nExiting Task Manager ...\n")
     exit()

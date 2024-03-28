@@ -6,6 +6,10 @@ def updateTask():
     print("Update a task")
 
 
+def listTasks():
+    print("Listing tasks...")
+
+
 def deleteTask():
     print("Delete a task")
 
@@ -16,6 +20,7 @@ def helpCommand():
         "help": "Displays Commands",
         "add": "Add a task to the list",
         "update": "Update a task",
+        "list": "List all of your tasks",
         "delete": "Delete a task from the list",
         "exit": "Exit the program",
     }

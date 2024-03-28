@@ -2,7 +2,14 @@ import unittest
 from unittest.mock import patch
 from io import StringIO
 import sys
-from cli.commands import addTask, updateTask, deleteTask, helpCommand, exitCommand
+from cli.commands import (
+    addTask,
+    updateTask,
+    listTasks,
+    deleteTask,
+    helpCommand,
+    exitCommand,
+)
 
 
 # testing cli commands to make sure they are working correctly
@@ -19,6 +26,12 @@ class TestCommands(unittest.TestCase):
         updateTask()
         self.assertEqual(mock_stdout.getvalue().strip(), "Update a task")
 
+    # list command
+    @patch("sys.stdout", new_callable=StringIO)
+    def test_list_task(self, mock_stdout):
+        listTasks()
+        self.assertEqual(mock_stdout.getvalue().strip(), "Listing tasks...")
+
     # delete command
     @patch("sys.stdout", new_callable=StringIO)
     def test_delete_task(self, mock_stdout):
@@ -30,11 +43,12 @@ class TestCommands(unittest.TestCase):
     def test_help_command(self, mock_stdout):
         helpCommand()
         expected_output = """Here are the commands you can use:
-help	 -    Displays Commands
-add	 -    Add a task to the list
-update	 -    Update a task
-delete	 -    Delete a task from the list
-exit	 -    Exit the program"""
+help\t -    Displays Commands
+add\t -    Add a task to the list
+update\t -    Update a task
+list\t -    List all of your tasks
+delete\t -    Delete a task from the list
+exit\t -    Exit the program"""
         self.assertEqual(mock_stdout.getvalue().strip(), expected_output)
 
     # exit command

@@ -1,8 +1,16 @@
-from commands import addTask, updateTask, exitCommand, deleteTask, helpCommand
+from commands import (
+    addTask,
+    listTasks,
+    updateTask,
+    exitCommand,
+    deleteTask,
+    helpCommand,
+)
 
 commands = {
     "add": addTask,
     "update": updateTask,
+    "list": listTasks,
     "delete": deleteTask,
     "help": helpCommand,
     "exit": exitCommand,

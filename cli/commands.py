@@ -1,6 +1,8 @@
 from app.models import Task
 from app.task_manager import TaskManager
 
+task_manager = TaskManager()
+
 
 def addTask():
     print("Adding task in progress ...")
@@ -13,7 +15,6 @@ def addTask():
     task = Task(taskName, taskDescription, taskPriority, taskStatus)
     task_dict = task.to_dict()
 
-    task_manager = TaskManager()
     task_manager.add_task(task_dict)
 
 
@@ -26,6 +27,7 @@ def updateTask():
 
 def listTasks():
     print("Listing tasks...")
+    task_manager.list_tasks()
 
 
 def deleteTask():

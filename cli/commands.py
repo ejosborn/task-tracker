@@ -31,14 +31,14 @@ def listTasks():
 
 
 def deleteTask():
-    taskName = input("\nWhich task would you like to delete (case sensitive):\n")
-    print(f"Looking for {taskName} now")
-    deleteTask = input(f"Are you sure you want to delete {taskName}? (y/n)\n")
-    deleteTask = deleteTask.lower()
+    taskID = input("\nEnter Task ID:\n")
+    deleteTask = input(f"\nAre you sure you want to delete {taskID}? (y/n)\n")
     if deleteTask == "y":
-        print(f"Deleting task: {taskName}\n")
+        # converting from string to ObjectID
+        objID = task_manager.to_ObjectID(taskID)
+        task_manager.delete_task(objID)
     else:
-        print("Back to menu")
+        print("\nBack to menu...")
 
 
 def helpCommand():

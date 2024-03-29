@@ -1,5 +1,6 @@
 import os
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -7,7 +8,10 @@ load_dotenv()
 
 class TaskManager:
     def __init__(self):
-        self.client = MongoClient(os.getenv("connection_string"))
+        try:
+            self.client = MongoClient(os.getenv("connection_string"))
+        except Exception as e:
+            print(f"Failed to connect to database: {e}")
 
     def add_task(self, task):
         try:
@@ -47,10 +51,21 @@ class TaskManager:
         except Exception as e:
             print(f"Failed to list tasks from database: {e}")
 
-    def delete_task(self, task):
-        # delete task from database
-        print("delete task")
+    def delete_task(self, taskId):
+        try:
+            db = self.client.get_database(os.getenv("DBNAME"))
+            task_collection = db["tasks"]
 
-    def find_task(self, taskName):
-        # find task from database
-        print(f"finding {taskName}")
+            deleteTask = task_collection.delete_one({"_id": taskId})
+
+            if deleteTask.deleted_count > 0:
+                # delete task from database
+                print(f"\nDeleted task: {taskId}")
+            else:
+                print(f"\nFailed to find task: {taskId}")
+        except Exception as e:
+            print(f"\nFailed to delete task {taskId}: {e}")
+
+    def to_ObjectID(self, taskID_string):
+        task_id = ObjectId(taskID_string)
+        return task_id

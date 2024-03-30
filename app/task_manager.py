@@ -22,7 +22,7 @@ class TaskManager:
             # Insert the task into collection
             task_collection.insert_one(task)
 
-            # Print acknowledgment message
+            # acknowledgment message
             return print("\nTask added to database")
         except Exception as e:
             return print(f"\nFailed to add task to database: {e}")
@@ -34,7 +34,9 @@ class TaskManager:
 
             task = task_collection.find_one({"_id": taskId})
 
+            # if found _id of task
             if task:
+                # reading new task information
                 newTitle = input("\nInput new title: \n")
                 newDescription = input("\nInput new description: \n")
                 newPriority = input("\nInput new priority: \n")
@@ -51,11 +53,11 @@ class TaskManager:
 
                 updateTask = task_collection.update_one({"_id": taskId}, updatedFields)
 
+                # checking if was modified
                 if updateTask.modified_count > 0:
                     return print("\nTask updated...")
             else:
                 return print(f"\nTask not found.")
-
         except Exception as e:
             return print(f"\nFailed to update task: {taskId}")
 
@@ -87,16 +89,19 @@ class TaskManager:
             db = self.client.get_database(os.getenv("DBNAME"))
             task_collection = db["tasks"]
 
+            # deletes based on _id
             deleteTask = task_collection.delete_one({"_id": taskId})
 
+            # checking if deleted
             if deleteTask.deleted_count > 0:
-                # delete task from database
+
                 return print(f"\nDeleted task: {taskId}")
             else:
                 return print(f"\nFailed to find task: {taskId}")
         except Exception as e:
             return print(f"\nFailed to delete task {taskId}: {e}")
 
+    # converts string to ObjectID so we can look up the task by _id in MongoDB
     def to_ObjectID(self, taskID_string):
         try:
             task_id = ObjectId(taskID_string)

@@ -7,12 +7,15 @@ task_manager = TaskManager()
 
 def addTask():
     print("Adding task in progress ...")
+
+    # reading input about task
     taskName = input("\nName of Task:\n")
     taskDescription = input("\nDescription of Task:\n")
     taskPriority = input("\nTask Priority: (Low, Medium, High, Urgent)\n")
     taskStatus = input("\nTask Status: (New, In Progress, Completed)\n")
     print("\nSending to database...")
 
+    # creating Task object
     task = Task(taskName, taskDescription, taskPriority, taskStatus)
     task_dict = task.to_dict()
 

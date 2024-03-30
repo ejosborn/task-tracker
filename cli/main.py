@@ -1,4 +1,4 @@
-from commands import (
+from .commands import (
     addTask,
     listTasks,
     updateTask,
@@ -24,13 +24,6 @@ def main():
     while True:
         command = input("\nTMS > ")
         command = command.lower()
-
-        # if command == "exit":
-        #     print("Exiting Task Manager ...\n")
-        #     exitCommand()
-
-        # if command == "help":
-        #     helpCommand()
 
         if command in commands:
             commands[command]()

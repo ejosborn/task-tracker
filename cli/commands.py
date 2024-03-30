@@ -1,6 +1,7 @@
 from app.models import Task
 from app.task_manager import TaskManager
 
+
 task_manager = TaskManager()
 
 
@@ -19,10 +20,9 @@ def addTask():
 
 
 def updateTask():
-    taskName = input("\nInput Task Name to Update (case sensitive):\n")
-    print(f"Looking for {taskName} now ...\n")
-    print("Found Task\n")
-    print(f"What would you like to update from {taskName}:")
+    taskID = input("\nEnter Task ID:\n")
+    objID = task_manager.to_ObjectID(taskID)
+    task_manager.update_task(objID)
 
 
 def listTasks():

@@ -3,7 +3,7 @@ name: cd
 on:
   push:
     branches:
-      - main
+      - testCdDocker
 
 jobs:
   deploy:
@@ -18,15 +18,3 @@ jobs:
 
       - name: Push Docker Image to Registry
         run: docker tag cli-image:latest ejosborn/cliapp:latest && docker push ejosborn/cliapp:latest
-
-      - name: SSH into EC2 Instance
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_KEY }}
-          script: |
-            docker pull <registry>/<repository>:latest
-            docker stop cli-container || true
-            docker rm cli-container || true
-            docker run -d --name cli-container -p 80:80 <registry>/<repository>:latest

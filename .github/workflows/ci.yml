@@ -22,12 +22,12 @@ jobs:
           python-version: '3.x'
 
       - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
+        run: python3 -c "import sys; print(sys.version)"
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip3 install -r requirements.txt
 
       - name: Run CLI Command Unit Tests
         run: |
-          python -m unittest tests.test_commands
+          python3 -m unittest tests.test_commands
